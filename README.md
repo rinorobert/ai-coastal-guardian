@@ -1,5 +1,9 @@
 # AI Coastal Guardian 🌊⚓
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Machine Learning](https://img.shields.io/badge/AI-Machine%20Learning-orange)
+![Status](https://img.shields.io/badge/Status-Development-yellow)
+
 AI Coastal Guardian is an AI-powered marine safety system designed to improve the safety of small-scale fishermen.
 The system predicts dangerous sea conditions using environmental data and triggers alerts or distress communication when risks are detected.
 
