@@ -30,3 +30,16 @@ class SeaDangerModel:
         }])
         prediction = self.model.predict(input_data)
         return prediction[0]
+    
+    def explain_prediction(self):
+
+        importance = self.model.feature_importances_
+
+        features = ["wind_speed", "wave_height", "pressure"]
+
+        explanation = {}
+
+        for feature, value in zip(features, importance):
+            explanation[feature] = round(value, 3)
+
+        return explanation
