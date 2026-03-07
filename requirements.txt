@@ -6,3 +6,5 @@ streamlit
 requests
 geopy
 python-dotenv
+streamlit
+plotly
