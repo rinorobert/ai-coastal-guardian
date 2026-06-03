@@ -458,17 +458,6 @@ prediction, explanation, risk_level = risk_agent.assess(
 risk_map = {"LOW":1,"MEDIUM":2,"HIGH":3}
 st.session_state.risk_history.append(risk_map[risk_level])
 
-st.subheader("⚠ Risk Assessment")
-
-if risk_level == "HIGH":
-    st.error("HIGH RISK — Dangerous sea conditions")
-elif risk_level == "MEDIUM":
-    st.warning("MEDIUM RISK — Fishermen should stay cautious")
-else:
-    st.success("LOW RISK — Safe sea conditions")
-
-st.divider()
-
 # ------------------------------------------------
 # RISK GAUGE
 # ------------------------------------------------
@@ -494,7 +483,6 @@ with col1:
     st.metric(
     label="Current Risk Level",
     value=risk_level,
-    delta=f"{value}% Risk Score"
     )
 
 with col2:
