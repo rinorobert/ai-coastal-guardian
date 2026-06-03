@@ -101,6 +101,10 @@ font-size:15px;
 gps = GPSTracker()
 
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
+try:
+    API_KEY = st.secrets["OPENWEATHER_API_KEY"]
+except:
+    API_KEY = os.getenv("OPENWEATHER_API_KEY")
 weather_api = WeatherAPI(API_KEY)
 
 risk_engine = RiskEngine()
@@ -325,6 +329,9 @@ if current_time - st.session_state.last_weather_update > 60:
 weather_data = st.session_state.weather_data
 
 if weather_data is None:
+    st.error(
+        "Unable to retrieve weather data. Check OpenWeather API configuration."
+    )
     st.stop()
 
 wave_height = weather_data["wind_speed"] * 0.1
