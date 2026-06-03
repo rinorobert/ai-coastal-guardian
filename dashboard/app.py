@@ -306,7 +306,7 @@ showlegend=False
 col1,col2,col3 = st.columns([1,2,1])
 
 with col2:
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 st.divider()
 
@@ -478,7 +478,7 @@ fig = go.Figure(go.Indicator(
     }
 ))
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 st.divider()
 
@@ -506,7 +506,7 @@ fig.update_layout(
     height=350
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 st.divider()
 
