@@ -27,6 +27,15 @@ Build an intelligent marine safety platform that helps fishermen by:
 
 ---
 
+## 🌍 Live Demo
+
+🔗 **Live Dashboard:**  
+https://ai-coastal-guardian-y85my3hysazrrazqekzauk.streamlit.app/
+
+> Hosted on Streamlit Community Cloud. Initial loading may take a few seconds.
+
+---
+
 ## 🚀 Implemented Features
 
 ### 🌊 AI Sea Danger Prediction
@@ -204,8 +213,12 @@ This project demonstrates:
 
 ## 👨‍💻 Author
 
-B.Tech AI & Data Science Project  
-Focused on improving safety for coastal fishermen communities.
+Rino Robert
+
+B.Tech Student in Artificial Intelligence & Data Science
+
+📧 rinorobert710@gmail.com  
+🔗 https://www.linkedin.com/in/rino-robert/
 
 ---
 
