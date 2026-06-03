@@ -206,10 +206,16 @@ st.subheader("🚢 Fishing Boats Monitoring Map")
 
 st.map(boat_df.rename(columns={"lat":"lat","lon":"lon"}), zoom=10)
 
-st.caption(
-    "ℹ️ Boat locations are generated using simulated GPS coordinates for demonstration purposes. "
-    "Since this prototype uses synthetic data rather than real vessel tracking, some markers may occasionally "
-    "appear on land or unrealistic locations. Future versions will integrate real-world GPS/AIS data sources."
+st.info(
+    """
+ℹ️ Simulation Notice
+
+Boat positions shown on the map are generated using simulated GPS coordinates for demonstration purposes.
+
+Since this prototype currently uses synthetic data instead of real AIS/GPS vessel feeds, some markers may occasionally appear on land or unrealistic locations.
+
+Future versions will integrate real-world maritime tracking data.
+"""
 )
 
 st.divider()
@@ -469,51 +475,124 @@ st.divider()
 
 st.subheader("⚠ Risk Level Gauge")
 
-value = {"LOW":20,"MEDIUM":60,"HIGH":90}[risk_level]
+# Convert categorical risk to numerical score
+risk_score_map = {
+    "LOW": 25,
+    "MEDIUM": 55,
+    "HIGH": 85
+}
+
+value = risk_score_map[risk_level]
+
+# ------------------------------------------------
+# RISK SUMMARY
+# ------------------------------------------------
+
+col1, col2 = st.columns([1, 2])
+
+with col1:
+    st.metric(
+    label="Current Risk Level",
+    value=risk_level,
+    delta=f"{value}% Risk Score"
+    )
+
+with col2:
+    if risk_level == "LOW":
+        st.success(
+            "🟢 Low Risk Sea Conditions — Fishing operations can proceed normally."
+        )
+
+    elif risk_level == "MEDIUM":
+        st.warning(
+            "🟡 Moderate Risk Sea Conditions — Extra caution is recommended."
+        )
+
+    else:
+        st.error(
+            "🔴 High Risk Sea Conditions — Fishing activity should be avoided."
+        )
+
+# ------------------------------------------------
+# GAUGE CHART
+# ------------------------------------------------
 
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=value,
-    title={'text':"Sea Risk Level"},
+
+    title={
+        "text": "Sea Risk Score",
+        "font": {"size": 24}
+    },
+
+    number={
+        "suffix": "%",
+        "font": {"size": 48}
+    },
+
     gauge={
-        'axis':{'range':[0,100]},
-        'steps':[
-            {'range':[0,40],'color':"green"},
-            {'range':[40,70],'color':"yellow"},
-            {'range':[70,100],'color':"red"}
-        ]
+        "axis": {
+            "range": [0, 100],
+            "tickwidth": 1,
+            "tickcolor": "white"
+        },
+
+        "bar": {
+            "color": "white",
+            "thickness": 0.30
+        },
+
+        "steps": [
+            {
+                "range": [0, 40],
+                "color": "green"
+            },
+            {
+                "range": [40, 70],
+                "color": "yellow"
+            },
+            {
+                "range": [70, 100],
+                "color": "red"
+            }
+        ],
+
+        "threshold": {
+            "line": {
+                "color": "white",
+                "width": 4
+            },
+            "thickness": 0.75,
+            "value": value
+        }
     }
 ))
 
-st.plotly_chart(fig, width="stretch")
-
-st.divider()
-
-# ------------------------------------------------
-# TREND
-# ------------------------------------------------
-
-st.subheader("📈 Sea Risk Trend")
-
-trend = pd.DataFrame({"risk":st.session_state.risk_history})
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    y=trend["risk"],
-    mode="lines+markers",
-    line=dict(color="cyan",width=3)
-))
-
 fig.update_layout(
-    yaxis=dict(
-        tickvals=[1,2,3],
-        ticktext=["LOW","MEDIUM","HIGH"]
+    height=350,
+
+    margin=dict(
+        l=40,
+        r=40,
+        t=80,
+        b=20
     ),
-    height=350
+
+    paper_bgcolor="#0E1117",
+    plot_bgcolor="#0E1117",
+
+    font=dict(
+        color="white",
+        size=16
+    )
 )
 
 st.plotly_chart(fig, width="stretch")
+
+st.caption(
+    f"AI Risk Score: {value}% ({risk_level}) • Calculated using wind speed, atmospheric pressure, estimated wave conditions, and the maritime risk assessment engine."
+)
 
 st.divider()
 
