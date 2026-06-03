@@ -202,6 +202,12 @@ st.subheader("🚢 Fishing Boats Monitoring Map")
 
 st.map(boat_df.rename(columns={"lat":"lat","lon":"lon"}), zoom=10)
 
+st.caption(
+    "ℹ️ Boat locations are generated using simulated GPS coordinates for demonstration purposes. "
+    "Since this prototype uses synthetic data rather than real vessel tracking, some markers may occasionally "
+    "appear on land or unrealistic locations. Future versions will integrate real-world GPS/AIS data sources."
+)
+
 st.divider()
 
 # ------------------------------------------------

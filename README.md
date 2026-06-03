@@ -37,9 +37,9 @@ Machine learning model predicts sea risk levels using:
 - Atmospheric pressure
 - Wave height
 
-### 📍 GPS Boat Tracking
+### 📍 Simulated GPS Boat Tracking
 
-Simulated GPS system tracks boat coordinates in real time.
+Synthetic GPS coordinates are generated to emulate fishing boat movement and monitoring scenarios. The current prototype does not use real vessel tracking data.
 
 ### 🌦 Live Weather Integration
 
